@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConfigsTable extends Migration
+class CreateRolsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateConfigsTable extends Migration
      */
     public function up()
     {
-        Schema::create('configs', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('primer_intento')->default(1);
-            $table->integer('segundo_intento')->default(2);
+        Schema::create('rols', function (Blueprint $table) {
+            $table->increments('idrol');
+            $table->string('description1',45);
+            $table->string('description2',45);
             $table->timestamps();
         });
     }
@@ -28,6 +28,8 @@ class CreateConfigsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('configs');
+        
+            Schema::dropIfExists('rols');
+        
     }
 }
