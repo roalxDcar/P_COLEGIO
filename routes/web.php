@@ -50,6 +50,7 @@ Route::group(['middleware'=>['auth']],function(){
 
 
 
+
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 // porque
