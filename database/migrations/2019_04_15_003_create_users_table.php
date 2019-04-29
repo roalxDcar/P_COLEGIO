@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->integer('attempts');
             $table->boolean('estate');
             $table->integer('total_attempts')->default(0);
+            $table->dateTime('lock_date')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
