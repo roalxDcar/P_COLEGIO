@@ -73,18 +73,18 @@
                     if(data.estado == 'aceptado'){
                         location.href = "{{ route('principal') }}";
                     }else if(data.estado == 'intentando'){
-                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.usuario.name} su numero de intentos es ${data.usuario.intentos}</div>`);
+                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.user.name} su numero de intentos es ${data.user.attempts}</div>`);
                     }else if(data.estado == 'primero'){
-                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.usuario.name} usted ya supero los tres intentos y tiene un total de intentos fallidos de ${data.usuario.total_intento} haci que mucho cuidado con el bloqueo por ahora debe esperar hasta tal hora ${data.usuario.fecha_bloqueo}</div>`);
+                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.user.name} usted ya supero los tres intentos y tiene un total de intentos fallidos de ${data.user.total_attempts} haci que mucho cuidado con el bloqueo por ahora debe esperar hasta tal hora ${data.user.lock_date}</div>`);
                     }else if(data.estado == 'segundo'){
-                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.usuario.name} usted ya supero los tres intentos y tiene un total de intentos fallidos de ${data.usuario.total_intento} haci que si falla los siguientes 3 intentos se pasara a bloquearlo, por ahora debe esperar hasta tal hora ${data.usuario.fecha_bloqueo}</div>`);
+                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.user.name} usted ya supero los tres intentos y tiene un total de intentos fallidos de ${data.user.total_attempts} haci que si falla los siguientes 3 intentos se pasara a bloquearlo, por ahora debe esperar hasta tal hora ${data.user.lock_date}</div>`);
                     }else if(data.estado == 'bloqueado'){
-                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.usuario.name} debe esperar hasta que se cumpla su hora de penalizacion por los tres intentos fallidos, hora ${data.usuario.fecha_bloqueo}</div>`);
+                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.user.name} debe esperar hasta que se cumpla su hora de penalizacion por los tres intentos fallidos, hora ${data.user.lock_date}</div>`);
                     }else if(data.estado == 'noExiste'){
                         $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estas credenciales no existen en nuestra Base de Datos</div>`);
 
                     }else if(data.estado == 'comuniquese'){
-                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.usuario.name} usted ya supero el total de intentos permitidos para fallar por favor comuniquese con el administrado o administradora para el desbloqueo </div>`);                    }
+                        $('#resultado').html(`<div class='alert alert-dismissable alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><strong>!Error</strong> Estimad@ ${data.user.name} usted ya supero el total de intentos permitidos para fallar por favor comuniquese con el administrado o administradora para el desbloqueo </div>`);                    }
                 }
             });
         });

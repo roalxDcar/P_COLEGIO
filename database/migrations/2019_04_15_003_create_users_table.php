@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('iduser');           
             $table->integer('id_rol')->unsigned();         
-            $table->integer('id_punishment')->unsigned(); 
+            // $table->integer('id_punishment')->unsigned(); 
             $table->string('name',45);
             $table->string('paternal',45);
             $table->string('maternal',45)->nullable();
@@ -25,8 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('ci',45)->unique();
             $table->string('cellphone',15);
-            $table->integer('attempts');
-            $table->boolean('estate');
+            $table->integer('attempts')->default(0);
+            $table->boolean('estate')->default(1);
             $table->integer('total_attempts')->default(0);
             $table->dateTime('lock_date')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->foreign('id_rol')->references('idrol')->on('rols');
-            $table->foreign('id_punishment')->references('idpunishment')->on('punishments');
+            // $table->foreign('id_punishment')->references('idpunishment')->on('punishments');
 
         });
     }

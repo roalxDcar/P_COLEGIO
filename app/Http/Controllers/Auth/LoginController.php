@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Config;
 use App\Http\Controllers\Controller;
+use App\Punishment;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,67 +18,66 @@ class LoginController extends Controller
     }
 
     public function login(Request $request){    
-        // $this->validateForm($request);
-        $fecha_actual = date("Y-m-d H:i:00");
-        $usuario = User::where('email',$request->email)->first();
-        if(!is_null($usuario)){
+        $current_date = date("Y-m-d H:i:00");
+        $user = User::where('email',$request->email)->first();
+        if(!is_null($user)){
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password]) 
-                && $usuario->intentos < 3 && $usuario->fecha_bloqueo <= $fecha_actual && $usuario->total_intento != 3)
+                && $user->attempts < 3 && $user->lock_date <= $current_date && $user->total_attempts != 3)
             {
-                $usuario->intentos = 0;
-                $usuario->total_intento = 0;
-                $usuario->save();
+                $user->attempts = 0;
+                $user->total_attempts = 0;
+                $user->save();
                 $data['estado'] = 'aceptado';
                 return $data;
             }else{
-                if($usuario->fecha_bloqueo <= $fecha_actual){
-                    if($usuario->intentos < 2){
-                        $usuario->intentos = $usuario->intentos + 1;
-                        $usuario->save();
+                if($user->lock_date <= $current_date){
+                    if($user->attempts < 2){
+                        $user->attempts = $user->attempts + 1;
+                        $user->save();
                         $data['estado'] = 'intentando';
-                        $data['usuario'] = $usuario;
+                        $data['user'] = $user;
                         return $data;
                     }else{
-                        if($usuario->total_intento == 2 || $usuario->total_intento == 3){
-                            $usuario->total_intento = 3;
-                            $usuario->save();
+                        if($user->total_attempts == 2 || $user->total_attempts == 3){
+                            $user->total_attempts = 3;
+                            $user->save();
                             $data['estado'] = 'comuniquese';
-                            $data['usuario'] = $usuario;
+                            $data['user'] = $user;
                             return $data;
                         }else{
-                            if($usuario->total_intento < 1){
-                                $con = Config::first();
-                                $fecha = date("y-m-d H:i:00",strtotime($fecha_actual."+ ".$con->primer_intento." minutes"));
-                                $usuario->fecha_bloqueo = $fecha;
-                                $usuario->intentos = 0;
-                                $usuario->total_intento = 1;
-                                $usuario->save();
+                            if($user->total_attempts < 1){
+                                $con = Punishment::first();
+                                $date = date("y-m-d H:i:00",strtotime($current_date."+ ".$con->punishment1." minutes"));
+                                $user->lock_date = $date;
+                                $user->attempts = 0;
+                                $user->total_attempts = 1;
+                                $user->save();
                                 $data['estado'] = 'primero';
-                                $data['usuario'] = $usuario;
+                                $data['user'] = $user;
                                 return $data;
                             }else{
-                                $con = Config::first();
-                                $fecha = date("y-m-d H:i:00",strtotime($fecha_actual."+ ".$con->segundo_intento." minutes"));
-                                $usuario->fecha_bloqueo = $fecha;
-                                $usuario->intentos = 0;
-                                $usuario->total_intento = 2;
-                                $usuario->save();
+                                $con = Punishment::first();
+                                $date = date("y-m-d H:i:00",strtotime($current_date."+ ".$con->punishment2." minutes"));
+                                $user->lock_date = $date;
+                                $user->attempts = 0;
+                                $user->total_attempts = 2;
+                                $user->save();
                                 $data['estado'] = 'segundo';
-                                $data['usuario'] = $usuario;
+                                $data['user'] = $user;
                                 return $data;
                             }
                         }
                     }
                 }else{
                     $data['estado'] = 'bloqueado';
-                    $data['usuario'] = $usuario;
+                    $data['user'] = $user;
                     return $data;
                 }
             }
         }else{
             $data['estado'] = 'noExiste';
             return $data;
-        } 
+        }
     }
 
     public function validateForm($request){

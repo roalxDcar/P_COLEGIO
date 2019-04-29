@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Rol;
 
 class RolsTableSeeder extends Seeder
 {
@@ -11,6 +12,9 @@ class RolsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Rol::create([
+        	'description1' => 'Administrador',
+        	'description2' => 'Gerente'
+        ]);
     }
 }

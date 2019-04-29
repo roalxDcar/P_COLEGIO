@@ -1,9 +1,9 @@
 <?php
 
-use App\Config;
+use App\Punishment;
 use Illuminate\Database\Seeder;
 
-class ConfigsTableSeeder extends Seeder
+class PunishmentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +12,9 @@ class ConfigsTableSeeder extends Seeder
      */
     public function run()
     {
-        Config::create([
-        	'primer_intento' => 1,
-        	'segundo_intento' => 3
+        Punishment::create([
+        	'punishment1' => 1,
+        	'punishment2' => 3
         ]);
     }
 }

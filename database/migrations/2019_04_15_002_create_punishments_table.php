@@ -15,8 +15,8 @@ class CreatePunishmentsTable extends Migration
     {
         Schema::create('punishments', function (Blueprint $table) {
             $table->increments('idpunishment');
-            $table->decimal('punishment1',5,4);
-            $table->decimal('punishment2',5,4);
+            $table->integer('punishment1');
+            $table->integer('punishment2');
             $table->timestamps();
         });
     }
