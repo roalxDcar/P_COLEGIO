@@ -38,7 +38,7 @@
               <span class="bar-login"></span>
               <label><i class="zmdi zmdi-account"></i> &nbsp; Email:</label>
               <span class="invalid-feedback hidden" role="alert" id="email-error">
-                    <strong>hola</strong>
+                    <strong>Hola</strong>
                 </span>
             </div><br>
 

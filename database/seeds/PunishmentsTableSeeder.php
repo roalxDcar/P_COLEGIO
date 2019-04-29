@@ -14,7 +14,7 @@ class PunishmentsTableSeeder extends Seeder
     {
         Punishment::create([
         	'punishment1' => 1,
-        	'punishment2' => 3
+        	'punishment2' => 3,
         ]);
     }
 }
