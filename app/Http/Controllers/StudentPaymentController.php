@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\MonthlyPayment;
+use App\StudentPayment;
 use Illuminate\Http\Request;
 
-class MonthlyPaymentController extends Controller
+class StudentPaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $monthly = MonthlyPayment::orderBy('idmonthly_payment','desc')->paginate(10);
-        return view('monthlypayments.index',['monthly'=> $monthly]);
+        $studentpayments = StudentPayment::orderBy('idstudent_payment','desc')->paginate(10);
+        return view('studentpayments.index',['studentpayments'=> $studentpayments]);
     }
 
     /**
@@ -25,7 +20,7 @@ class MonthlyPaymentController extends Controller
      */
     public function create()
     {
-        return view('monthlypayments.create');
+        return view('studentpayments.create');
     }
 
     /**
@@ -68,7 +63,7 @@ class MonthlyPaymentController extends Controller
         $monthly->start_date = $request->start_date;
         $monthly->end_date =  $request->end_date;
         $monthly->description = $request->description;
-        $monthly->save();
+        $monthly-> save();
         return redirect()->route('mensualidad.index');
     }
 

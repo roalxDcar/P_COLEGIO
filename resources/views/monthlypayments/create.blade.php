@@ -10,7 +10,7 @@
         <div class="col-xs-12 lead">
             <ol class="breadcrumb">
                 <li class="active">Agregar nuevo</li>
-                <li><a href="{{ route('monthly.index') }}">listado de pensiones</a></li>
+                <li><a href="{{ route('mensualidad.index') }}">listado de pensiones</a></li>
             </ol>
         </div>
     </div>
@@ -18,7 +18,7 @@
 <div class="container-fluid">
     <div class="container-flat-form">
         <div class="title-flat-form title-flat-blue">Registrar nueva Pension</div>
-        <form method="POST" action="{{ route('monthly.store') }}">
+        <form method="POST" action="{{ route('mensualidad.store') }}">
             @csrf
             <div class="row">
                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
