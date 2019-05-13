@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\MonthlyPayment;
+use App\Parallel;
 use Illuminate\Http\Request;
 
-class MonthlyPaymentController extends Controller
+class ParallelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,10 @@ class MonthlyPaymentController extends Controller
      */
     public function index()
     {
-        $monthly = MonthlyPayment::orderBy('idmonthly_payment','desc')->paginate(10);
-        return view('monthlypayments.index',['monthly'=> $monthly]);
+        $parallels = Parallel::orderBy('idparallel','desc')->paginate(7);
+        return view('parallels.index',[
+            'parallels' => $parallels
+            ]);
     }
 
     /**
@@ -25,7 +27,7 @@ class MonthlyPaymentController extends Controller
      */
     public function create()
     {
-        return view('monthlypayments.create');
+        return view('parallels.create');
     }
 
     /**
@@ -36,62 +38,59 @@ class MonthlyPaymentController extends Controller
      */
     public function store(Request $request)
     {
-        $monthly = new MonthlyPayment;
-        $monthly->start_date=$request->start_date;
-        $monthly->end_date= $request->end_date;
-        $monthly->description=$request->description;
-        $monthly->save();
-        return redirect()->route('monthly.index');
+        $parallel =new Parallel;
+        $parallel->name= $request->name;
+        $parallel->quantity = $request->quantity;
+        $parallel->save();
+        return redirect()->route('parallels.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Parallel  $parallel
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Parallel $parallel)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Parallel  $parallel
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //$monthly = MonthlyPayment::findOrFail($id);
-        //return view('monthlypayments.edit',['monthly'=> $monthly]);
-        return view("degrees.create");
+        $parallel = Parallel::findOrFail($id);
+        return view('parallels.edit',['degree' => $parallel]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Parallel  $parallel
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $monthly = MonthlyPayment::findOrFail($id);
-        $monthly -> start_date = $request -> start_date;
-        $monthly -> end_date =  $request -> end_date;
-        $monthly -> description = $request -> description;
-        $monthly -> save();
-        return redirect()->route('monthly.index');
+        $parallel =Parallel::findOrFail($id);
+        $parallel->name= $request->name;
+        $parallel->quantity = $request->quantity;
+        $parallel->save();
+        return redirect()->route('parallel.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Parallel  $parallel
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Parallel $parallel)
     {
         //
     }

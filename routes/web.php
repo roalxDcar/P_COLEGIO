@@ -58,3 +58,10 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 Route::resource('pensiones','PensionController');
 
 Route::resource('monthly','MonthlyPaymentController');
+
+Route::resource('parallels','ParallelController');
+
+Route::resource('degrees','DegreeController');
+
+Route::resource('inscriptions','InscriptionController');
+
