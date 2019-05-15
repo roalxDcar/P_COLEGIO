@@ -13,15 +13,15 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-        	'name' => 'Ronald',
+        	'name' => 'Martin',
             'id_rol' => 1,
-            'paternal' => 'Mollericona',
-            'maternal' => 'Miranda',
+            'paternal' => 'Sinka',
+            'maternal' => 'Castillo',
             'gender' => 'Masculino',
-            'address' => 'Calle: Gregorio Garcia Lanza',
-            'ci' => '13408746',
-            'cellphone' => '75273121',
-        	'email' => 'roalmollericona@gmail.com',
+            'address' => 'Calle: Melchor Guzman',
+            'ci' => '8400954',
+            'cellphone' => '61155135',
+        	'email' => 'sinkamartins@gmail.com',
         	'password' => bcrypt(12345678),
         ]);
     }
