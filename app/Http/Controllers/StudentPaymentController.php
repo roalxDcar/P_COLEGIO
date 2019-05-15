@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\MonthlyPayment;
 use App\StudentPayment;
+use App\User;
 use Illuminate\Http\Request;
 
 class StudentPaymentController extends Controller
@@ -13,22 +15,25 @@ class StudentPaymentController extends Controller
         return view('studentpayments.index',['studentpayments'=> $studentpayments]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('studentpayments.create');
+    	$students = User::where('id_rol',4)->get();
+    	// $students = User::where('id_rol',4)->pluck('ci', 'iduser');
+        return view('studentpayments.create',[
+        	'students' => $students
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function getMonthly(){
+    	$monthly = MonthlyPayment::where('state',1)->orderBy('idmonthly_payment','desc')->paginate(10);
+    	return ['monthly' => $monthly];
+    }
+
+    public function getStudent($ci){
+    	$student = User::where('ci',$ci)->first();
+    	return ['student' => $student];
+    }
+
     public function store(Request $request)
     {
         $monthly = new MonthlyPayment;
